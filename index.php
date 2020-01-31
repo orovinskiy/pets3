@@ -26,7 +26,22 @@ $f3->route('GET /', function () {
 });
 
 //route for form one
-$f3->route('GET|POST /order', function () {
+$f3->route('GET|POST /order', function ($f3) {
+    $_SESSION = array();
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(isset($_POST['animal'])){
+            $animal = $_POST['animal'];
+            if(validString($animal)){
+                $_SESSION['animal'] = $animal;
+                $f3->reroute('/order2');
+            }
+            else{
+                $f3->set("error['animal]","Please enter a animal");
+            }
+        }
+
+    }
     $view = new Template();
     echo $view->render('views/form1.html');
 });
