@@ -13,6 +13,7 @@ require_once('vendor/autoload.php');
 
 //create an instance of the base class
 $f3 = Base::instance();
+$f3->set('colors', array('pink','green','blue'));
 
 //define a default route
 $f3->route('GET /', function () {
