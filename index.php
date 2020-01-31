@@ -13,6 +13,10 @@ require_once('vendor/autoload.php');
 
 //create an instance of the base class
 $f3 = Base::instance();
+
+//debug level
+$f3->set('DEBUG', 3);
+
 $f3->set('colors', array('pink','green','blue'));
 
 //define a default route
@@ -22,7 +26,7 @@ $f3->route('GET /', function () {
 });
 
 //route for form one
-$f3->route('GET /order', function () {
+$f3->route('GET|POST /order', function () {
     $view = new Template();
     echo $view->render('views/form1.html');
 });
