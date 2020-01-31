@@ -10,6 +10,7 @@ error_reporting(E_ALL);
 
 //require the autoload file
 require_once('vendor/autoload.php');
+require_once ('model/validation-functions.php');
 
 //create an instance of the base class
 $f3 = Base::instance();
@@ -37,7 +38,7 @@ $f3->route('GET|POST /order', function ($f3) {
                 $f3->reroute('/order2');
             }
             else{
-                $f3->set("error['animal]","Please enter a animal");
+                $f3->set("error['animal']","Please enter a animal");
             }
         }
 
@@ -47,18 +48,17 @@ $f3->route('GET|POST /order', function ($f3) {
 });
 
 //route for form 2
-$f3->route('POST /order2', function ($f3) {
-    $_SESSION = array();
+$f3->route('GET|POST /order2', function ($f3) {
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(isset($_POST['color'])){
             $color = $_POST['color'];
-            if(validString($color)){
+            if(validColor($color)){
                 $_SESSION['color'] = $color;
                 $f3->reroute('/results');
             }
             else{
-                $f3->set("error['color]","Please enter a color");
+                $f3->set("error['color']","Please enter a color");
             }
         }
 
@@ -68,8 +68,7 @@ $f3->route('POST /order2', function ($f3) {
 });
 
 //route for results page
-$f3->route('POST /results', function () {
-    $_SESSION['color'] = $_POST['color'];
+$f3->route('GET|POST /results', function () {
     $view = new Template();
     echo $view->render('views/results.html');
 });

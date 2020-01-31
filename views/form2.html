@@ -5,11 +5,11 @@
     <title>form2</title>
 </head>
 <body>
-    <form method="post" action="#">
+    <form method="post" action="">
     <label>Color.</label>
         <div class="col-sm-3">
-            <check if="{{ isset(@errors['color']) }}">
-                <p>{{ @errors['color'] }}</p>
+            <check if="{{ isset(@error['color']) }}">
+                <p>{{ @error['color'] }}</p>
             </check>
         <select name="color">
             <repeat group="{{ @colors }}" value=" {{ @colorOption }}">
