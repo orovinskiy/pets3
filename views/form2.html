@@ -7,11 +7,17 @@
 <body>
     <form method="post" action="#">
     <label>Color.</label>
+        <div class="col-sm-3">
+            <check if="{{ isset(@errors['color']) }}">
+                <p>{{ @errors['color'] }}</p>
+            </check>
         <select name="color">
             <repeat group="{{ @colors }}" value=" {{ @colorOption }}">
                 <option value="{{ @colorOption }}">{{ @colorOption }}</option>
             </repeat>
         </select>
+        </div>
+
         <button type="submit">Submit</button>
     </form>
 </body>

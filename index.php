@@ -47,8 +47,22 @@ $f3->route('GET|POST /order', function ($f3) {
 });
 
 //route for form 2
-$f3->route('POST /order2', function () {
-    $_SESSION['animal'] = $_POST['animal'];
+$f3->route('POST /order2', function ($f3) {
+    $_SESSION = array();
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(isset($_POST['color'])){
+            $color = $_POST['color'];
+            if(validString($color)){
+                $_SESSION['color'] = $color;
+                $f3->reroute('/results');
+            }
+            else{
+                $f3->set("error['color]","Please enter a color");
+            }
+        }
+
+    }
     $view = new Template();
     echo $view->render('views/form2.html');
 });

@@ -6,8 +6,13 @@
 </head>
 <body>
     <form method="POST" action="#" >
+        <div class="col-sm-3">
+            <check if="{{ isset(@errors['animal']) }}">
+                <p>{{ @errors['animal'] }}</p>
+            </check>
         <label>Animal
             <input type="text" name="animal"></label>
+        </div>
         <button type="submit">Next</button>
     </form>
 </body>
